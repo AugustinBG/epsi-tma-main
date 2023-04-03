@@ -41,7 +41,11 @@ export class PopinProductComponent{
       }
     }
   }
-
+  closeDialog() {
+    // use the MatDialogRef to close the dialog
+    this.dialogRef.close();
+  }
+  
   submit() {
     this.apiService.createProduct(this.produit);
     this.dialogRef.close(this.produit);

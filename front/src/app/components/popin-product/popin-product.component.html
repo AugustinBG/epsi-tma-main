@@ -1,25 +1,31 @@
-<h1 mat-dialog-title>{{statePopin()}}</h1>
 <div mat-dialog-content>
   <p>Quel est le nom de votre produit ? </p>
   <mat-form-field appearance="fill">
     <mat-label>nom du produit</mat-label>
-    <input matInput [(ngModel)]="produit.name" >
+    <input type="text" id="name" name="name" required class="form-control"
+     matInput [(ngModel)]="produit.name" pattern="[A-Za-z ]*" ng-pattern="/^[^0-9]*$/">
+     <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
+     <!-- La première expression régulière permet d'accepter uniquement les lettres et les espaces -->
+     <!-- La deuxième expression régulière permet de refuser les chiffres -->
   </mat-form-field>
-
   <p>Quel est son prix ? </p>
   <mat-form-field appearance="fill">
     <mat-label>prix</mat-label>
-    <input matInput [(ngModel)]="produit.price">
+    <input type="text" id="price" required name="price" class="form-control"
+     matInput [(ngModel)]="produit.price" pattern="[0-9]+">
+     <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
+     <!-- Cette expression régulière permet d'accepter uniquement les chiffres -->
   </mat-form-field>
-
   <p>Quelle est la quantité ? </p>
   <mat-form-field appearance="fill">
     <mat-label>quantité</mat-label>
-    <input matInput [(ngModel)]="produit.quantity">
+    <input type="text" id="quantity" name="quantity" required class="form-control"
+      matInput [(ngModel)]="produit.quantity" pattern="[0-9]+">
+      <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ -->
+      <!-- Cette expression régulière permet d'accepter uniquement les chiffres -->
   </mat-form-field>
-
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-raised-button (click)="submit()">OK</button>
+  <button mat-button (click)="closeDialog()">No Thanks</button>
+  <button mat-raised-button (click)="submit()" [disabled]="!produit.name || !produit.price || !produit.quantity">OK</button>
 </div>

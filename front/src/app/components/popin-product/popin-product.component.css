@@ -1,0 +1,21 @@
+/* Style pour le conteneur */
+.mat-dialog-content {
+    padding: 24px;
+  }
+  
+  /* Style pour les champs de saisie */
+  .mat-form-field {
+    width: 100%;
+  }
+  
+  /* Style pour les boutons */
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+  }
+  
+  .mat-dialog-actions button {
+    min-width: 120px;
+  }
+  
