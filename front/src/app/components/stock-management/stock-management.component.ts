@@ -4,7 +4,7 @@ import {ApiService} from "../../services/api/api.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {PopinProductComponent} from "../popin-product/popin-product.component";
-import { Router } from '@angular/router';
+//import { Router } from '@angular/router';
 
 
 
@@ -24,7 +24,8 @@ export class StockManagementComponent implements OnInit{
   constructor(private apiService : ApiService,
               private snackBar: MatSnackBar,
               public dialog: MatDialog,
-              private router: Router) { }
+              //private router: Router
+              ) { }
 
   ngOnInit() {
       this.apiService.getallProduct().subscribe(data => {
@@ -55,7 +56,8 @@ export class StockManagementComponent implements OnInit{
   delete( product: Produit){
     this.products = this.products.filter(produit => produit.id = product.id);
     this.apiService.removeProduct(product);
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigate([`/${this.router.url}`]));
+    location.reload();
+    //this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => this.router.navigate([`/${this.router.url}`]));
 
   }
 
