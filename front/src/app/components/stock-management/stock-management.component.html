@@ -1,37 +1,41 @@
 <div class="container">
-
   <ng-template [ngIf]="isLoading">
-    <mat-progress-spinner style="margin:0 auto;"
-                          mode="indeterminate"></mat-progress-spinner>
+  <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner>
   </ng-template>
-
+  
   <ng-template [ngIf]="!isLoading">
   <h1 class="text-center mb-4">Gestion des stocks</h1>
-    <div class="table-responsive" *ngIf="products.length > 0">
-    <table class="table">
-    <thead>
-    <tr>
-      <th scope="col">Produit</th>
-      <th scope="col" >Prix</th>
-      <th scope="col" >Quantité</th>
-      <th scope="col">actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let product of products">
-      <td>{{ product.name }}</td>
-      <td>{{ product.price }}</td>
-      <td>{{ product.quantity }}</td>
-      <td>
-          <a [matTooltip]="minusElement" (click)="removeOneProduct(product)"><i class="fa fa-minus" aria-hidden="false"></i></a>
-        <a [matTooltip]="addElement" (click)="addProduct(product)"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
-      </td>
-    </tr>
-    </tbody>
+  <div class="table-responsive" *ngIf="products.length > 0">
+  <table class="table">
+  <thead>
+  <tr>
+  <th scope="col">Produit</th>
+  <th scope="col">Prix</th>
+  <th scope="col">Quantité</th>
+  <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products">
+  <td>{{ product.name }}</td>
+  <td>{{ product.price }}</td>
+  <td>{{ product.quantity }}</td>
+  <td>
+  <a [matTooltip]="minusElement" (click)="removeOneProduct(product)"><i class="fa fa-minus" aria-hidden="false"></i></a>
+  <a [matTooltip]="addElement" (click)="addProduct(product)"><i class="fa fa-plus-circle" aria-hidden="true"></i></a>
+  </td>
+  <td>
+  <button mat-icon-button color="warn" aria-label="Supprimer" (click)="delete(product)">
+  <button>delete</button>
+  </button>
+  </td>
+  </tr>
+  </tbody>
   </table>
-    </div>
-    <br>
-    <button mat-raised-button color="primary" class="button-center-responsive" (click)="openPopin()">ajouter Produit</button>
+  </div>
+  <br>
+  <button mat-raised-button color="primary" class="button-center-responsive" (click)="openPopin()">Ajouter produit</button>
   </ng-template>
-</div>
-
+  
+  </div>
+  
