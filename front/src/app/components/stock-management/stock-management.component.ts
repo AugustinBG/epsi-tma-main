@@ -42,15 +42,15 @@ export class StockManagementComponent implements OnInit{
   }
 
   removeOneProduct(product: Produit) {
-    product.quantity=product.quantity-1;
-    if(product.quantity == 0){
-      this.products = this.products.filter(produit => produit.id = product.id);
+    product.quantity -= 1;
+
+    if (product.quantity === 0) {
+      this.products = this.products.filter(produit => produit.id !== product.id);
       this.apiService.removeProduct(product);
-    }
-    else{
+    } else {
+      product.price = product.price / (product.quantity + 1) * product.quantity;
       this.apiService.modifyProduct(product);
     }
-
   }
 
   delete( product: Produit){
@@ -71,9 +71,15 @@ export class StockManagementComponent implements OnInit{
   }
 
   addProduct(product: Produit) {
-    if (this.products.find(produit => produit.id == product.id)){
-      // @ts-ignore
-      this.products.find(produit => produit.id == product.id).quantity += 1;
+    const existingProduct = this.products.find(produit => produit.id === product.id);
+
+    if (existingProduct) {
+      existingProduct.quantity += 1;
+      existingProduct.price = existingProduct.price / (existingProduct.quantity - 1) * existingProduct.quantity;
+      this.apiService.modifyProduct(existingProduct);
+    } else {
+      product.price = product.price * product.quantity;
+      this.products.push(product);
       this.apiService.modifyProduct(product);
     }
   }
