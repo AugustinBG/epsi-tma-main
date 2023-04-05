@@ -3,19 +3,19 @@
   <p>Quel est le nom de votre produit ? </p>
   <mat-form-field appearance="fill">
     <mat-label>nom du produit</mat-label>
-    <input matInput [(ngModel)]="produit.name" >
+    <input matInput [(ngModel)]="produit.name" type="text" pattern="[A-Za-z ]*" required>
   </mat-form-field>
 
   <p>Quel est son prix ? </p>
   <mat-form-field appearance="fill">
     <mat-label>prix</mat-label>
-    <input matInput [(ngModel)]="produit.price">
+    <input matInput [(ngModel)]="produit.price" type="number" step="0.01" min="0" required>
   </mat-form-field>
 
   <p>Quelle est la quantité ? </p>
   <mat-form-field appearance="fill">
     <mat-label>quantité</mat-label>
-    <input matInput [(ngModel)]="produit.quantity">
+    <input matInput [(ngModel)]="produit.quantity" type="number" step="1" min="0" required>
   </mat-form-field>
 
 </div>

@@ -9,10 +9,14 @@ def get_all_products(db: Session):
 
 
 def create_product(db: Session, product: ProductSchema):
-  product_model = ProductModel(name=product.name, price=product.price, quantity=product.quantity)
-  db.add(product_model)
-  db.commit()
-  db.refresh(product_model)
+    if product.is_valid():  # Vérification de la validation du schéma de données
+        product_model = ProductModel(name=product.name, price=product.price, quantity=product.quantity)
+        db.add(product_model)
+        db.commit()
+        db.refresh(product_model)
+    else:
+        raise ValueError("Invalid product data.")
+
 
 
 def get_product_by_id(id: int, db: Session):
@@ -20,12 +24,14 @@ def get_product_by_id(id: int, db: Session):
 
 
 def update_product_by_id(product: ProductSchema, id: int, db: Session):
-  product_model = get_product_by_id(id, db)
-  product_model.name = product.name
-  product_model.price = product.price
-  product_model.quantity = product.quantity
-  db.commit()
-  db.refresh(product_model)
+    product_model = get_product_by_id(id, db)
+    product_model.name = product.name
+    product_model.price = product.price
+    old_quantity = product_model.quantity
+    product_model.quantity = product.quantity
+    product_model.price = product_model.price * (product_model.quantity / old_quantity)
+    db.commit()
+    db.refresh(product_model)
 
 
 def delete_product_by_id(id: int, db: Session):

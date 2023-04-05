@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Produit} from "../../models/produit/produit.model";
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +18,7 @@ export class ApiService {
   }
 
   modifyProduct(product: Produit) {
-    this.http.put<Produit>(this.url + product.id,product.serialize()).subscribe();
+    this.http.put<Produit>(this.url + product.id,product).subscribe();
   }
 
   getallProduct(){
@@ -24,6 +26,10 @@ export class ApiService {
   }
 
   createProduct(produit : Produit){
-    this.http.post<Produit>(this.url,produit.serialize()).subscribe();
+    this.http.post<Produit>(this.url,produit).subscribe();
   }
+
+  
+
+  
 }

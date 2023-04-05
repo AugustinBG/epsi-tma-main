@@ -50,11 +50,16 @@ export class StockManagementComponent implements OnInit{
 
   openPopin() {
     const dialogRef = this.dialog.open(PopinProductComponent);
-
+  
     dialogRef.afterClosed().subscribe(result => {
-      this.products.push(result);
+      if (result) {
+        this.products.push(result);
+      }
     });
+  }
 
+  adjustPrice() {
+    this.products.find(produit => produit.id == produit.id)
   }
 
   addProduct(product: Produit) {
